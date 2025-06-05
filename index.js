@@ -113,16 +113,16 @@ app.get("/upload", async (req, res) => {
             JSON.stringify([fullName, ageValue, addressObj, extraProps])
         );
 
-        // await db.query(
-        //   `INSERT INTO public.users ("name", age, address, additional_info) VALUES ($1, $2, $3, $4)`,
-        //   [fullName, ageValue, addressObj, extraProps]
-        // );
+        await db.query(
+          `INSERT INTO public.users ("name", age, address, additional_info) VALUES ($1, $2, $3, $4)`,
+          [fullName, ageValue, addressObj, extraProps]
+        );
       } catch (insertErr) {
         console.error("Row processing failed:", flatRow, insertErr);
       }
     }
 
-    // await computeAgeStatistics();
+    await computeAgeStatistics();
     res.send("CSV upload and import finished.");
   } catch (mainErr) {
     console.error("Upload failed:", mainErr);
